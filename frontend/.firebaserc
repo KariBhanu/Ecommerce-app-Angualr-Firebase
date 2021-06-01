@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "e-commerce-72d7a"
+  "targets": {
+    "ecommerce-app-a9332": {
+      "hosting": {
+        "frontend": [
+          "ecommerce-app-a9332"
+        ]
+      }
+    }
   }
 }
