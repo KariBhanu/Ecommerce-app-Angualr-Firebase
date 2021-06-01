@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
   createForm() {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required ],
+      email: ['', Validators.required],
       password: ['',Validators.required]
     });
   }
@@ -26,8 +24,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   submit(val:any){
-    this.router.navigate(['/dashboard']);
-    console.log(val.email);
+    //this.router.navigate(['/dashboard']);
+    console.log("success",val);
   }
   
 }

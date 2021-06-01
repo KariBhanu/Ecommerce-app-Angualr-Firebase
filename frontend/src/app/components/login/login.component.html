@@ -3,7 +3,7 @@
         <div class="card-body">
         <h4 class="card-title alignCenter">Login</h4>
             <div class="card-text">
-                <form [formGroup]="loginForm">
+                <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control inputbox" id="exampleInputEmail1" placeholder="Enter email" formControlName="email" required>
@@ -14,7 +14,7 @@
                         <label class="error">{{errorMessage}}</label>
                         </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary loginButton" (click)="submit(loginForm.value)">Log in</button>
+                        <button type="submit" class="btn btn-primary loginButton" [disabled]="loginForm.untouched">Log in</button>
                         <button type="button" class="btn btn-danger loginButton">Log in with Google</button>
                     </div>
                     <div>
