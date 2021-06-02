@@ -3,7 +3,7 @@
         <div class="card-body">
         <h4 class="card-title alignCenter">Sign Up</h4>
             <div class="card-text">
-                <form [formGroup]="registerForm" (ngSubmit)="submit(registerForm.value)">
+                <form [formGroup]="registerForm" (ngSubmit)="signup(registerForm.value)">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
                         <input type="email" class="form-control inputbox" placeholder="Enter email" formControlName="email" required>
@@ -15,10 +15,9 @@
                         </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary loginButton" [disabled]="registerForm.untouched">Sign Up</button>
-                        <button type="button" class="btn btn-danger loginButton">Sign up with Google</button>
                     </div>
                     <div>
-                        <p>Already existing user?<a class="redirect" routerLink="/login">Login</a></p>
+                        <p>Already existing user? <a style="text-decoration: none;" routerLink="/login">Login</a></p>
                     </div>
                 </form>
             </div>      
