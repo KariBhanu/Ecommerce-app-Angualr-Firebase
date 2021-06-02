@@ -6,11 +6,11 @@
                 <form [formGroup]="registerForm" (ngSubmit)="submit(registerForm.value)">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control inputbox" id="exampleInputEmail1" placeholder="Enter email" formControlName="email" required>
+                        <input type="email" class="form-control inputbox" placeholder="Enter email" formControlName="email" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control inputbox" id="exampleInputPassword1" placeholder="Password" formControlName="password" required>
+                        <input type="password" class="form-control inputbox" placeholder="Password" formControlName="password" required>
                         <label class="error">{{errorMessage}}</label>
                         </div>
                     <div class="form-group">
@@ -18,7 +18,7 @@
                         <button type="button" class="btn btn-danger loginButton">Sign up with Google</button>
                     </div>
                     <div>
-                        <span>Already existing user?<span class="redirect" routerLink="/login"> Login</span></span>
+                        <p>Already existing user?<a class="redirect" routerLink="/login">Login</a></p>
                     </div>
                 </form>
             </div>      
