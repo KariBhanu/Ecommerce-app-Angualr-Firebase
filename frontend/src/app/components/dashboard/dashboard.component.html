@@ -1,6 +1,9 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <h3 routerLink="/dashboard"><img src="/assets/wait.svg" class="wait" />Wind back Time</h3>
+    <div class="d-flex logoBox" >
+    <img src="/assets/wait.svg" />
+    <p routerLink="/dashboard">Wind back Time</p>
+  </div>
     <form class="d-flex searchBox">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -14,11 +17,21 @@
         </svg></button>
       </li>
       <li class="nav-item" *ngIf="userLogged">
-        <button class="btn btn-danger" (click)="logout()">Logout</button>
+        <button class="btn btn-danger loginButton" (click)="logout()">Logout</button>
       </li>
       <li class="nav-item" *ngIf="!userLogged">
-        <button class="btn btn-primary" (click)="logout()">Login</button>
+        <button class="btn btn-primary loginButton" routerLink="/login">Login</button>
+      </li>
+      <li class="nav-item" *ngIf="!userLogged">
+        <button class="btn btn-success loginButton" routerLink="/signup">Signup</button>
       </li>
     </ul>
   </div>
 </nav>
+
+
+<!-- 
+<div class="container" *ngIf="userLogged">
+    <h1>{{user.email}}</h1>
+    <h1>testing</h1> 
+</div> -->

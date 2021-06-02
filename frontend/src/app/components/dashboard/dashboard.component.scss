@@ -1,12 +1,17 @@
 .navbar{
     //background-color: #5a0404e8 !important;
-    h3{
-        color: #7e0606;
-        .wait{
-            height:5%;
-            width:5%;
+    .logoBox{
+        img{
+            height: 30px;
+        // width: 100px;
+            margin-top:5px;
         }
-    
+        p{
+            color: #7e0606;
+            font-size: 25px;
+            margin: 0px !important;
+        }
+        margin-bottom: 1px !important;
     }
     input{
         border: 2px solid;

@@ -25,10 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  submit(val:any){
-    this.router.navigate(['/dashboard']);
-    console.log("success",val);
-  }
+  
   googleLogin(){
     this.authService.doGooglelogin()
     .then(res => {

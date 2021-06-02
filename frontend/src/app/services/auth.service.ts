@@ -5,8 +5,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthService {
+  userData: any; // Save logged in user data
 
-  constructor(public afAuth: AngularFireAuth) { }
+  constructor(public afAuth: AngularFireAuth) { 
+    this.afAuth.authState.subscribe(user => {
+    if (user) {
+      this.userData = user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      JSON.parse(localStorage.getItem('user') || '{}');
+    } else {
+      localStorage.setItem('user', '');
+      JSON.parse(localStorage.getItem('user') || '{}');
+    }
+  })
+}
   
   doGooglelogin(){
     return new Promise<any>((resolve,reject)=>{
@@ -25,6 +37,7 @@ export class AuthService {
     return new Promise<any>((resolve,reject)=>{
       firebase.auth().signOut()
         .then(res => {
+          localStorage.removeItem('user');
           resolve(res);
         }, err => {
           console.log(err);
