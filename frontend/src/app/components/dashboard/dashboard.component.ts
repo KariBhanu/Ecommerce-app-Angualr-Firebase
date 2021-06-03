@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
   public userLogged!: boolean;
   public products = new ProductsModel();
   public searchText = '';
-
+  public cartCount = '';
+  public cartOpened = false;
   constructor(public authService: AuthService, private router: Router, private afAuth: AngularFireAuth) {
    }
 
@@ -32,6 +33,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  ref(val:any){
+    this.cartCount = val;
+  }
+
+  cartOpen():void{
+    this.cartOpened = true;
+  }
+  cartClose():void{
+    this.cartOpened = false;
+  }
   // tslint:disable-next-line: typedef
   logout(){
     this.authService.dologout()

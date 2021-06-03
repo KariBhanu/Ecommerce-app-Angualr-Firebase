@@ -1,4 +1,5 @@
-import { Component, Input, OnInit , OnChanges } from '@angular/core';
+import { Component, Input, OnInit , OnChanges, EventEmitter, Output } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -9,15 +10,24 @@ export class ProductsComponent implements OnInit , OnChanges {
 
   @Input()  allProductList: any;
   @Input() searchedText!: string;
+  @Output() cartCount: EventEmitter<string> = new EventEmitter();
+
+  public count = 0;
   public filteredProducts: any;
-  constructor() { }
+  constructor(public cartService: CartService) { }
 
   ngOnInit(): void {
-    //console.log(this.allProductList);
+    // console.log(this.allProductList);
   }
   ngOnChanges(): void{
     this.filteredProducts = this.productFilter();
     console.log(this.filteredProducts);
+  }
+
+  addTocart(val:any): void{
+    this.count = this.count + 1;
+    this.cartCount.emit(this.count.toString());
+    this.cartService.addtoCart(val);
   }
 
   productFilter(): any{
