@@ -12,7 +12,8 @@ export class CheckoutComponent implements OnInit {
   constructor(public cartService: CartService) { }
   public cartData:any = [];
   ngOnInit(): void {
-    this.cartData = this.cartService.cartData;
+    this.cartData = this.cartService.cartItemsList;
+    console.log(this.cartData)
 
   }
   cartClosefun(){

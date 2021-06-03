@@ -74,13 +74,13 @@
                       </tr>
                       <tr *ngFor="let itm of cartData">      
                         <td class="text-center">{{itm.product_name}}</td>
-                        <td></td>
+                        <td>{{itm.product_price}}</td>
                         <td class="w30">
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                              <button class="btn btn-info" type="button" >+</button>
+                              <button class="btn btn-info" type="button">+</button>
                             </div>
-                            <input type="text" class="form-control text-center"   >
+                            <input type="text" class="form-control text-center" value="{{itm.qty}}" >
                             <div class="input-group-append">
                               <button class="btn btn-danger" type="button" >-</button>
                             </div>
