@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import firebase  from 'firebase/app';
+import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class AuthService {
   userData: any; // Save logged in user data
 
-  constructor(public afAuth: AngularFireAuth) { 
+  constructor(public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
     if (user) {
       this.userData = user;
@@ -17,12 +17,12 @@ export class AuthService {
       localStorage.setItem('user', '');
       JSON.parse(localStorage.getItem('user') || '{}');
     }
-  })
+  });
 }
-  
+
   doGooglelogin(){
-    return new Promise<any>((resolve,reject)=>{
-      var provider = new firebase.auth.GoogleAuthProvider();
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth()
               .signInWithPopup(provider)
               .then(res => {
@@ -31,10 +31,10 @@ export class AuthService {
                 console.log(err);
                 reject(err);
               });
-    });    
+    });
   }
   dologout(){
-    return new Promise<any>((resolve,reject)=>{
+    return new Promise<any>((resolve, reject) => {
       firebase.auth().signOut()
         .then(res => {
           localStorage.removeItem('user');
@@ -46,38 +46,38 @@ export class AuthService {
     });
   }
 
-  registerUser(email:any,password:any){
-    return new Promise<any>((resolve,reject)=>{
+  registerUser(email: any, password: any){
+    return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(email, password)
               .then((userCredential) => {
-              // Signed in 
-              var user = userCredential.user;
+              // Signed in
+              const user = userCredential.user;
               resolve(user);
               // ...
             })
             .catch((error) => {
-              var errorCode = error.code;
-              var errorMessage = error.message;
+              const errorCode = error.code;
+              const errorMessage = error.message;
               reject(errorCode);
             });
-    })
+    });
   }
-  loginUser(email:any,password:any){
-    return new Promise<any>((resolve,reject)=>{
+  loginUser(email: any, password: any){
+    return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in
-        var user = userCredential.user;
+        const user = userCredential.user;
         resolve(user);
         // ...
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         reject(errorCode);
       });
-    })
-    
+    });
+
 
   }
 }

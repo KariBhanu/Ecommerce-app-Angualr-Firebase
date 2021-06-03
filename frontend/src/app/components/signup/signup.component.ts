@@ -11,33 +11,35 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignupComponent implements OnInit {
 
   registerForm!: FormGroup;
-  errorMessage: string = '';
-  successMessage: string = '';
-  constructor(private fb: FormBuilder,private router: Router,public authService: AuthService) {
+  errorMessage = '';
+  successMessage = '';
+  constructor(private fb: FormBuilder, private router: Router, public authService: AuthService) {
     this.createForm();
    }
 
+   // tslint:disable-next-line: typedef
    createForm() {
      this.registerForm = this.fb.group({
        email: ['', Validators.required],
-       password: ['',Validators.required]
+       password: ['', Validators.required]
      });
    }
 
   ngOnInit(): void {
   }
-  submit(val:any){
-    //this.router.navigate(['/dashboard']);
-    console.log("success",val);
+   // tslint:disable-next-line: typedef
+  submit(val: any){
+    // this.router.navigate(['/dashboard']);
+    console.log('success', val);
   }
 
-  signup(val:any){
-    this.authService.registerUser(val.email,val.password)
+  signup(val: any): void{
+    this.authService.registerUser(val.email, val.password)
     .then(res => {
       this.router.navigate(['/login']);
-    }).catch(err =>{
+    }).catch(err => {
       console.log(err);
-    })
+    });
   }
 
 }
