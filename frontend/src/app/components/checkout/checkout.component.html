@@ -73,20 +73,20 @@
                       
                       </tr>
                       <tr *ngFor="let item of this.cartService.cartItemsList">      
-                        <td class="text-center">{{item.product_name}}</td>
-                        <td>{{item.product_price}}</td>
+                        <td class="text-center">{{item[0].product_name}}</td>
+                        <td>{{item[0].product_price}}</td>
                         <td class="w30">
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                              <button class="btn btn-info" type="button" (click)="this.cartService.addtoCart(item,1)">+</button>
+                              <button class="btn btn-info" type="button" (click)="this.cartService.addtoCart(item[0])">+</button>
                             </div>
-                            <input type="text" class="form-control text-center" style="width:10px;" value="{{item.qty}}" >
+                            <input type="text" class="form-control text-center" style="width:10px;" value="{{item[0].qty}}" >
                             <div class="input-group-append">
-                              <button class="btn btn-danger" type="button" (click)="this.cartService.removefromCart(item)">-</button>
+                              <button class="btn btn-danger" type="button" (click)="this.cartService.removefromCart(item[0])">-</button>
                             </div>
                           </div>
                         </td>
-                        <td>{{item.total}}</td>
+                        <td>{{item[0].total}}</td>
                       </tr>
                       </tbody>
                   </table>
@@ -102,3 +102,4 @@
             continue shopping
     </button>
 </div>
+

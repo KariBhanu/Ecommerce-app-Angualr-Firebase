@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit , OnChanges {
     this.cartCount.emit(this.count.toString());
    // val = {...val,
      //       "qty":0}
-    this.cartService.addtoCart(val,1);
+    this.cartService.addtoCart(val);
   }
 
   productFilter(): any{
