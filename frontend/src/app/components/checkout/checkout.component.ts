@@ -10,13 +10,9 @@ export class CheckoutComponent implements OnInit {
 
   @Output() cartClose: EventEmitter<string> = new EventEmitter();
   constructor(public cartService: CartService) { }
-  public cartData:any = [];
   ngOnInit(): void {
-    this.cartData = this.cartService.cartItemsList;
-    console.log(this.cartData)
-
   }
-  cartClosefun(){
+  cartClosefun(): void{
     this.cartClose.emit();
   }
 }

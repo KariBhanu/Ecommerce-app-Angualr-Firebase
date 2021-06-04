@@ -14,7 +14,7 @@
         margin-bottom: 1px !important;
     }
     input{
-        border: 1px solid #157347;
+        border: 1px solid #0B5ED7;
         border-radius: 4px;
         //color:#198754;
     }
@@ -24,5 +24,14 @@
     //   }
     .searchBox{
         width:40%;
+    }
+    .cartCount{
+        position: absolute;
+        color: #7e0606;
+        margin-left: -23px;
+        top: 18px
+    }
+    .cartCount:hover{
+        color: white;
     }
 }

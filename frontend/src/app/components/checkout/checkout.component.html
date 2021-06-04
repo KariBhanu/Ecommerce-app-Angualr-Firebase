@@ -1,7 +1,7 @@
 <div class="mainBox">
     <h1 class="title">Check-out</h1>
     <div class="row" style="margin-top:20px;">
-        <div class="col">
+        <div class="col-md-7">
             <div class="card">
                 <h5 class="card-header bg-info bg-light">Billing Information</h5>
                 <div class="card-body">
@@ -50,11 +50,11 @@
                     </div> 
             </div>             
         </div>
-        <div class="col">
+        <div class="col-md-5">
             <div class="card text-center">
                 <div class="card-header">
                   Your Cart Items
-                  <button type="button" class="btn btn-sm btn-danger mr-2 float-right">
+                  <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="this.cartService.emptyCart()">
                      Empty Cart       
                   </button>
                 </div>
@@ -72,28 +72,28 @@
                       <tr>
                       
                       </tr>
-                      <tr *ngFor="let itm of cartData">      
-                        <td class="text-center">{{itm.product_name}}</td>
-                        <td>{{itm.product_price}}</td>
+                      <tr *ngFor="let item of this.cartService.cartItemsList">      
+                        <td class="text-center">{{item.product_name}}</td>
+                        <td>{{item.product_price}}</td>
                         <td class="w30">
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                              <button class="btn btn-info" type="button">+</button>
+                              <button class="btn btn-info" type="button" (click)="this.cartService.addtoCart(item,1)">+</button>
                             </div>
-                            <input type="text" class="form-control text-center" value="{{itm.qty}}" >
+                            <input type="text" class="form-control text-center" style="width:10px;" value="{{item.qty}}" >
                             <div class="input-group-append">
-                              <button class="btn btn-danger" type="button" >-</button>
+                              <button class="btn btn-danger" type="button" (click)="this.cartService.removefromCart(item)">-</button>
                             </div>
                           </div>
                         </td>
-                        <td></td>
+                        <td>{{item.total}}</td>
                       </tr>
                       </tbody>
                   </table>
                   <button  class="btn btn-primary">Checkout</button>
                 </div>
                 <div class="card-footer text-muted font-weight-bold">
-                  Total : Rs. 
+                  Total : Rs. {{this.cartService.cartTotal}}
                 </div>  
               </div>
         </div>

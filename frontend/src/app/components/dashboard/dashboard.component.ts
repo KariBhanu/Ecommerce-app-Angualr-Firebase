@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import {AngularFireAuth} from '@angular/fire/auth';
 import { userModel } from 'src/app/services/user';
 import { ProductsModel } from 'src/app/model/products.model';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnInit {
   public searchText = '';
   public cartCount = '';
   public cartOpened = false;
-  constructor(public authService: AuthService, private router: Router, private afAuth: AngularFireAuth) {
+  constructor(public authService: AuthService, private router: Router, private afAuth: AngularFireAuth, public cartService: CartService) {
    }
 
   ngOnInit(): void {
