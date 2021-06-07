@@ -6,14 +6,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
   userData: any; // Save logged in user data
-
+userLogged!: boolean;
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
     if (user) {
       this.userData = user;
+      this.userLogged = true;
       localStorage.setItem('user', JSON.stringify(this.userData));
       JSON.parse(localStorage.getItem('user') || '{}');
     } else {
+      this.userLogged = false;
       localStorage.setItem('user', '');
       JSON.parse(localStorage.getItem('user') || '{}');
     }

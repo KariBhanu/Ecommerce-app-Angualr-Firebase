@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import firebase from 'firebase/app';
@@ -12,11 +12,12 @@ import { CartService } from 'src/app/services/cart.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit , OnChanges {
 
 
   // public user = new userModel;
   public userLogged!: boolean;
+  public user: any;
   public products = new ProductsModel();
   public searchText = '';
   public cartCount = '';
@@ -27,11 +28,19 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.afAuth.authState.subscribe(user => {
       if (user) {
+        this.user = user.email;
+        //console.log(user.email);
+        this.cartService.getCartItems(this.user);
         this.userLogged = true;
       } else {
         this.userLogged = false;
       }
     });
+    //this.cartService.getCartItems(this.user);
+  }
+  ngOnChanges(){
+    console.log("this is run");
+    //this.cartService.getCartItems(this.user);
   }
 
   ref(val:any){
@@ -50,6 +59,7 @@ export class DashboardComponent implements OnInit {
         .then(res => {
           // this.user.email = "";
           this.userLogged = false;
+          this.cartService.emptyCart();
           // this.router.navigate(['/login']);
         }).catch(err => {
           console.log(err);

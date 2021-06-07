@@ -15,20 +15,21 @@ export class CartService  {
   public testcartItemsList: any = [];
 
   constructor(public storageService: StorageService) {
-    // this.cartData = this.allItems.data;
+    this.cartData = [];
     // this.cartData.forEach((item: any) => {
     //   item.qty = 0;
     //   item.total = 0;
     // });
   }
 
-  getCartItems(): void{
-    this.storageService.getCartData().subscribe(data => {
-      this.testcartItemsList = data.map(e => {
-        return e.payload.doc.data();
+  getCartItems(user: any){
+    this.cartData = [];
+    this.storageService.getCartData(user).toPromise().then((querySnapshot: any) => {
+      querySnapshot.forEach((doc: any) => {
+        this.cartData.push(doc.data());
       });
-      console.log(this.testcartItemsList);
-    });
+      this.cartList();
+  });
   }
   property_group(objectArray: any, property: any){
     return objectArray.reduce((acc: any, obj: any) => {
@@ -42,40 +43,23 @@ export class CartService  {
  }
 
 
-  addtoCart(val: any): void{
-
-    // this.storageService.addCartitem(val);
+  async addtoCart(val: any){
+   this.storageService.addCartitem(val);
+  }
+  removefromCart(val: any): void{
     // this.cartData.forEach((item: any) => {
     //   if (item.p_id === val.p_id){
-    //     item.qty = item.qty + qty;
+    //     item.qty = item.qty - 1;
     //     item.total = item.product_price * item.qty;
     //   }
     // });
-    // this.cartItemsCount = this.cartItemsCount + 1;
     // this.cartItemsList = this.cartData.filter((item: any) => {
     //   return item.qty > 0;
     // });
     // this.cartTotal = this.cartItemsList.reduce((acc: any, item: any) => {
     //   return acc = acc + item.total;
     // }, 0);
-    this.getCartItems();
-    this.cartData.push(val);
-    this.cartList();
-  }
-  removefromCart(val: any): void{
-    this.cartData.forEach((item: any) => {
-      if (item.p_id === val.p_id){
-        item.qty = item.qty - 1;
-        item.total = item.product_price * item.qty;
-      }
-    });
-    this.cartItemsList = this.cartData.filter((item: any) => {
-      return item.qty > 0;
-    });
-    this.cartTotal = this.cartItemsList.reduce((acc: any, item: any) => {
-      return acc = acc + item.total;
-    }, 0);
-    this.cartItemsCount = this.cartItemsCount - 1;
+    // this.cartItemsCount = this.cartItemsCount - 1;
   }
   emptyCart(): void{
     this.cartData = [];
@@ -102,12 +86,30 @@ export class CartService  {
                   t.p_id === thing.p_id
           )));
       total = total + temp[key][0].total;
+    console.log(temp[key][0]);
       this.cartItemsList.push(temp[key]);
     }
     this.cartTotal = total;
-    console.log(this.cartData);
-    console.log(this.cartItemsList);
+    console.log("cartData",this.cartData);
+    console.log("cartItemList",this.cartItemsList);
   }
 
 
 }
+
+
+
+
+   // this.cartData.forEach((item: any) => {
+    //   if (item.p_id === val.p_id){
+    //     item.qty = item.qty + qty;
+    //     item.total = item.product_price * item.qty;
+    //   }
+    // });
+    // this.cartItemsCount = this.cartItemsCount + 1;
+    // this.cartItemsList = this.cartData.filter((item: any) => {
+    //   return item.qty > 0;
+    // });
+    // this.cartTotal = this.cartItemsList.reduce((acc: any, item: any) => {
+    //   return acc = acc + item.total;
+    // }, 0);

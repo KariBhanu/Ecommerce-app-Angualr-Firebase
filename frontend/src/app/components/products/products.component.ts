@@ -10,6 +10,7 @@ export class ProductsComponent implements OnInit , OnChanges {
 
   @Input()  allProductList: any;
   @Input() searchedText!: string;
+  @Input() user!: string;
   @Output() cartCount: EventEmitter<string> = new EventEmitter();
 
   public count = 0;
@@ -27,8 +28,9 @@ export class ProductsComponent implements OnInit , OnChanges {
   addTocart(val:any): void{
     this.count = this.count + 1;
     this.cartCount.emit(this.count.toString());
-   // val = {...val,
-     //       "qty":0}
+    this.cartService.getCartItems(this.user);
+    val = {...val,
+           'user': this.user};
     this.cartService.addtoCart(val);
   }
 
