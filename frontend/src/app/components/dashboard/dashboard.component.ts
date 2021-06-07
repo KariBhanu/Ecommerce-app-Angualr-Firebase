@@ -29,9 +29,8 @@ export class DashboardComponent implements OnInit , OnChanges {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.user = user.email;
-        //console.log(user.email);
-        this.cartService.getCartItems(this.user);
         this.userLogged = true;
+        this.cartService.getCartItems(this.user);
       } else {
         this.userLogged = false;
       }
@@ -59,8 +58,7 @@ export class DashboardComponent implements OnInit , OnChanges {
         .then(res => {
           // this.user.email = "";
           this.userLogged = false;
-          this.cartService.emptyCart();
-          // this.router.navigate(['/login']);
+          this.cartService.emptyCart('');
         }).catch(err => {
           console.log(err);
         });

@@ -5,41 +5,41 @@
             <div class="card">
                 <h5 class="card-header bg-info bg-light">Billing Information</h5>
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="addressForm">
                         <div class="row">
                             <div class="form-group col">
                                 <label>First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name">
+                                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstname">
                             </div>
                             <div class="form-group col">
                                 <label>Last Name</label>
-                                <input type="password" class="form-control" placeholder="Enter Last name">
+                                <input type="password" class="form-control" placeholder="Enter Last name" formControlName="lastname">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col">
                                 <label>Address</label>
-                                <input type="text" class="form-control" placeholder="Enter Address">
+                                <input type="text" class="form-control" placeholder="Enter Address" formControlName="address">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col">
                                 <label>Phonenumber</label>
-                                <input type="text" class="form-control" placeholder="Enter Phonenumber">
+                                <input type="text" class="form-control" placeholder="Enter Phonenumber" formControlName="phonenumber">
                             </div>
                             <div class="form-group col">
                                 <label>District</label>
-                                <input type="text" class="form-control" placeholder="Enter District">
+                                <input type="text" class="form-control" placeholder="Enter District" formControlName="district">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col">
                                 <label>Pincode</label>
-                                <input type="text" class="form-control" placeholder="Enter Pincode">
+                                <input type="text" class="form-control" placeholder="Enter Pincode" formControlName="pincode">
                             </div>
                             <div class="form-group col">
                                 <label>State</label>
-                                <input type="password" class="form-control" placeholder="Enter State">
+                                <input type="password" class="form-control" placeholder="Enter State" formControlName="state">
                             </div>
                         </div>
                       </form>
@@ -54,7 +54,7 @@
             <div class="card text-center">
                 <div class="card-header">
                   Your Cart Items
-                  <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="this.cartService.emptyCart()">
+                  <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="this.cartService.emptyCart(this.user)">
                      Empty Cart       
                   </button>
                 </div>
@@ -72,21 +72,21 @@
                       <tr>
                       
                       </tr>
-                      <tr *ngFor="let item of this.cartService.cartItemsList">      
-                        <td class="text-center">{{item[0].product_name}}</td>
-                        <td>{{item[0].product_price}}</td>
+                      <tr *ngFor="let item of this.cartService.cartData">      
+                        <td class="text-center">{{item.product_name}}</td>
+                        <td>{{item.product_price}}</td>
                         <td class="w30">
                           <div class="input-group input-group-sm mb-3">
                             <div class="input-group-prepend">
-                              <button class="btn btn-info" type="button" (click)="this.cartService.addtoCart(item[0])">+</button>
+                              <button class="btn btn-info" type="button" (click)="addTocart(item)">+</button>
                             </div>
-                            <input type="text" class="form-control text-center" style="width:10px;" value="{{item[0].qty}}" >
+                            <input type="text" class="form-control text-center" style="width:10px;" value="{{item.qty}}" >
                             <div class="input-group-append">
-                              <button class="btn btn-danger" type="button" (click)="this.cartService.removefromCart(item[0])">-</button>
+                              <button class="btn btn-danger" type="button" (click)="this.cartService.removefromCart(item)">-</button>
                             </div>
                           </div>
                         </td>
-                        <td>{{item[0].total}}</td>
+                        <td>{{item.product_price * item.qty}}</td>
                       </tr>
                       </tbody>
                   </table>

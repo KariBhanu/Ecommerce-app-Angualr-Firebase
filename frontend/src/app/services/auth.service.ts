@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
   userData: any; // Save logged in user data
-userLogged!: boolean;
+  userLogged!: boolean;
   constructor(public afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(user => {
     if (user) {
@@ -27,8 +27,9 @@ userLogged!: boolean;
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth()
               .signInWithPopup(provider)
-              .then(res => {
-                resolve(res);
+              .then(userCredential => {
+                const user = userCredential.user;
+                resolve(user);
               }, err => {
                 console.log(err);
                 reject(err);
@@ -70,6 +71,7 @@ userLogged!: boolean;
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
+        
         resolve(user);
         // ...
       })

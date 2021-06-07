@@ -11,25 +11,21 @@ export class ProductsComponent implements OnInit , OnChanges {
   @Input()  allProductList: any;
   @Input() searchedText!: string;
   @Input() user!: string;
-  @Output() cartCount: EventEmitter<string> = new EventEmitter();
-
   public count = 0;
   public filteredProducts: any;
   constructor(public cartService: CartService) { }
 
   ngOnInit(): void {
-    // console.log(this.allProductList);
+    //this.cartService.getCartItems(this.user);
   }
   ngOnChanges(): void{
     this.filteredProducts = this.productFilter();
     console.log(this.filteredProducts);
   }
 
-  addTocart(val:any): void{
-    this.count = this.count + 1;
-    this.cartCount.emit(this.count.toString());
-    this.cartService.getCartItems(this.user);
+  addTocart(val: any): void{
     val = {...val,
+            'qty':1,
            'user': this.user};
     this.cartService.addtoCart(val);
   }

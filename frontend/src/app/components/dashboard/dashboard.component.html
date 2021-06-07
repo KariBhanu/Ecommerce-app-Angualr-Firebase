@@ -30,7 +30,7 @@
 </nav>
 
 
-<app-products [allProductList]="products.data" [searchedText]="searchText" [user]="user" (cartCount)="ref($event)" *ngIf="!cartOpened"></app-products>
-<app-checkout (cartClose)="cartClose()" *ngIf="cartOpened"></app-checkout>
+<app-products [allProductList]="products.data" [searchedText]="searchText" [user]="user"  *ngIf="!cartOpened"></app-products>
+<app-checkout (cartClose)="cartClose()"  [user]="user" *ngIf="cartOpened"></app-checkout>
 
  
