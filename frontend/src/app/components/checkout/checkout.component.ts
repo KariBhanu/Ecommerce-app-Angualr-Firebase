@@ -15,6 +15,7 @@ export class CheckoutComponent implements OnInit {
   public cartList = [];
   public cartTotal = 0;
   public address = {};
+  public successMsg: boolean = false;
   public invoiceDate: any = new Date();
   public invoiceNo: any = Math.floor(Math.random() * 10000);
 
@@ -62,6 +63,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   saveAddress(){
+    this.successMsg = true;
     this.address = this.addressForm.value;
   }
 }
