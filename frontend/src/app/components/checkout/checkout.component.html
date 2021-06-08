@@ -1,105 +1,182 @@
 <div class="mainBox">
-    <h1 class="title">Check-out</h1>
-    <div class="row" style="margin-top:20px;">
-        <div class="col-md-7">
-            <div class="card">
-                <h5 class="card-header bg-info bg-light">Billing Information</h5>
-                <div class="card-body">
-                    <form [formGroup]="addressForm">
-                        <div class="row">
-                            <div class="form-group col">
-                                <label>First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" formControlName="firstname" name="firstname">
-                            </div>
-                            <div class="form-group col">
-                                <label>Last Name</label>
-                                <input type="password" class="form-control" placeholder="Enter Last name" formControlName="lastname" name="lastname">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label>Address</label>
-                                <input type="text" class="form-control" placeholder="Enter Address" formControlName="address" name="address">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label>Phonenumber</label>
-                                <input type="text" class="form-control" placeholder="Enter Phonenumber" formControlName="phonenumber" name="phonenumber">
-                            </div>
-                            <div class="form-group col">
-                                <label>District</label>
-                                <input type="text" class="form-control" placeholder="Enter District" formControlName="district" name="district">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label>Pincode</label>
-                                <input type="text" class="form-control" placeholder="Enter Pincode" formControlName="pincode" name="pincode">
-                            </div>
-                            <div class="form-group col">
-                                <label>State</label>
-                                <input type="password" class="form-control" placeholder="Enter State" formControlName="state">
-                            </div>
-                        </div>
-                      </form>
-                     
-                </div> 
-                <div class="card-footer text-muted font-weight-bold">
-                    <button type="submit" class="btn btn-primary" [disabled]="addressForm.untouched">Save</button>
-                    </div> 
-            </div>             
-        </div>
-        <div class="col-md-5">
-            <div class="card text-center">
-                <div class="card-header">
-                  Your Cart Items
-                  <button type="button" class="btn btn-sm btn-danger mr-2 float-right" (click)="this.cartService.emptyCart(this.user)">
-                     Empty Cart       
-                  </button>
+  <h1 class="title">Check-out</h1>
+  <div *ngIf="!invoiceShow">
+    <div class="row" style="margin-top: 20px">
+      <div class="col-md-7">
+        <div class="card">
+          <h5 class="card-header bg-info bg-light">Billing Information</h5>
+          <div class="card-body">
+            <form [formGroup]="addressForm">
+              <div class="row">
+                <div class="form-group col">
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter First Name"
+                    formControlName="firstname"
+                    name="firstname"
+                  />
                 </div>
-                <div class="card-body">  
-                  <table class="table">
-                    <thead>
-                      <tr>      
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Qty</th>
-                        <th scope="col">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                      
-                      </tr>
-                      <tr *ngFor="let item of this.cartService.cartData">      
-                        <td class="text-center">{{item.product_name}}</td>
-                        <td>{{item.product_price}}</td>
-                        <td class="w30">
-                          <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                              <button class="btn btn-info" type="button" (click)="addTocart(item)">+</button>
-                            </div>
-                            <input type="text" class="form-control text-center" style="width:10px;" value="{{item.qty}}" >
-                            <div class="input-group-append">
-                              <button class="btn btn-danger" type="button" (click)="this.cartService.removefromCart(item)">-</button>
-                            </div>
-                          </div>
-                        </td>
-                        <td>{{item.product_price * item.qty}}</td>
-                      </tr>
-                      </tbody>
-                  </table>
-                  <button  class="btn btn-primary" [disabled]="addressForm.untouched">Checkout</button>
+                <div class="form-group col">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Last name"
+                    formControlName="lastname"
+                    name="lastname"
+                  />
                 </div>
-                <div class="card-footer text-muted font-weight-bold">
-                  Total : Rs. {{this.cartService.cartTotal}}
-                </div>  
               </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label>Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Address"
+                    formControlName="address"
+                    name="address"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label>Phonenumber</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Phonenumber"
+                    formControlName="phonenumber"
+                    name="phonenumber"
+                  />
+                </div>
+                <div class="form-group col">
+                  <label>District</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter District"
+                    formControlName="district"
+                    name="district"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col">
+                  <label>Pincode</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Pincode"
+                    formControlName="pincode"
+                    name="pincode"
+                  />
+                </div>
+                <div class="form-group col">
+                  <label>State</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter State"
+                    formControlName="state"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer text-muted font-weight-bold">
+            <button 
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="addressForm.invalid"
+              (click)="saveAddress()"
+            >
+              Save
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="col-md-5">
+        <div class="card text-center">
+          <div class="card-header">
+            Your Cart Items
+            <button
+              type="button"
+              class="btn btn-sm btn-danger mr-2 float-right"
+              (click)="this.cartService.emptyCart(this.user)"
+            >
+              Empty Cart
+            </button>
+          </div>
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr></tr>
+                <tr *ngFor="let item of this.cartService.cartData">
+                  <td class="text-center">{{ item.product_name }}</td>
+                  <td>{{ item.product_price }}</td>
+                  <td class="w30">
+                    <div class="input-group input-group-sm mb-3">
+                      <div class="input-group-prepend">
+                        <button
+                          class="btn btn-info"
+                          type="button"
+                          (click)="addTocart(item)"
+                        >
+                          +
+                        </button>
+                      </div>
+                      <input
+                        type="text"
+                        class="form-control text-center"
+                        style="width: 10px"
+                        value="{{ item.qty }}"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          class="btn btn-danger"
+                          type="button"
+                          (click)="this.cartService.removefromCart(item)"
+                        >
+                          -
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{ item.product_price * item.qty }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-primary" [disabled]="!(this.cartService.cartItemsCount > 0 && addressForm.valid)" (click)="checkOut()">
+              Checkout
+            </button>
+          </div>
+          <div class="card-footer text-muted font-weight-bold">
+            Total : Rs. {{ this.cartService.cartTotal }}
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-primary" (click)="cartClosefun()" style="margin-top:20px;"> 
-            continue shopping
+    <button
+      class="btn btn-primary"
+      (click)="cartClosefun()"
+      style="margin-top: 20px"
+    >
+      continue shopping
     </button>
+  </div>
+  <div style="margin-top: 10px;"><app-invoice *ngIf="invoiceShow" [cartList]="cartList" [cartTotal]="cartTotal" [address]="address" 
+    [user]="user" [invoiceNo]="invoiceNo" [invoiceDate] = "invoiceDate"
+     (cartClose)="cartClosefun()"> </app-invoice>
+  </div>
 </div>
-

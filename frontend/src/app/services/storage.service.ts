@@ -58,6 +58,20 @@ deleteDoc(docId:any){
   return this.storage.collection('userCart').doc(docId).delete();
 }
 
+addToOrder(val:any){
+  return new Promise<any> ((resolve,reject)=>{
+    this.storage.collection('userOrders').add(val)
+            .then((docRef) => {
+              resolve('Successs')
+              console.log('Document written with ID: ', docRef.id);
+            })
+            .catch((error) => {
+              reject();
+              console.error('Error adding document: ', error);
+          });
+  })
+}
+
 removefromCart(val:any){
   return new Promise<any> ((resolve,reject)=>{
     const temp: any = [];

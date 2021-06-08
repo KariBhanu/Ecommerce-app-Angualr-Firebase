@@ -11,6 +11,13 @@ export class CheckoutComponent implements OnInit {
   @Input() user!: string;
   @Output() cartClose: EventEmitter<string> = new EventEmitter();
   addressForm!: FormGroup;
+  public invoiceShow = false;
+  public cartList = [];
+  public cartTotal = 0;
+  public address = {};
+  public invoiceDate: any = new Date();
+  public invoiceNo: any = Math.floor(Math.random() * 10000);
+
   constructor(public cartService: CartService, private fb: FormBuilder) {
     this.createForm();
   }
@@ -32,8 +39,29 @@ export class CheckoutComponent implements OnInit {
   }
   cartClosefun(): void{
     this.cartClose.emit();
+    this.invoiceShow = false;
   }
   addTocart(val: any){
     this.cartService.addtoCart(val);
+
+  }
+  checkOut(){
+    this.invoiceShow = true;
+    this.cartList = this.cartService.cartData;
+    this.cartTotal = this.cartService.cartTotal;
+    this.address = this.addressForm.value;
+    const temp = {
+      user: this.user,
+      orderSummary: this.cartList,
+      total: this.cartTotal,
+      address: {...this.address, email: this.user},
+      'invoice-id': this.invoiceNo,
+      'invoice-date': this.invoiceDate
+    };
+    this.cartService.checkOutOrder(temp);
+  }
+
+  saveAddress(){
+    this.address = this.addressForm.value;
   }
 }

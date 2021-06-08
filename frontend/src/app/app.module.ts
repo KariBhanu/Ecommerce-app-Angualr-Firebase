@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsComponent } from './components/products/products.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     LoginComponent,
     SignupComponent,
     ProductsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,
