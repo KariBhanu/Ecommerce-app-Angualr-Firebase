@@ -11,7 +11,7 @@ export class CartService  {
   public cartItemsCount: any = 0;
 
   constructor(public storageService: StorageService) {
-    //this.cartData = [];
+    // this.cartData = [];
   }
 
   getCartItems(user: any){
@@ -22,12 +22,24 @@ export class CartService  {
         this.cartData.push(doc.data());
       });
       this.cartTotalCounter();
-      console.log(this.cartData)
-      console.log(this.cartTotal)
+      console.log(this.cartData);
+      console.log(this.cartTotal);
       console.log(this.cartItemsCount);
     });
   }
 
+  dummyFunc(){
+    console.log("from dummy",this.cartData);
+    console.log("from dummy",this.cartTotal);
+    console.log("from dummy",this.cartItemsCount);
+  }
+
+
+  logoutEmpty(){
+    this.cartData=[];
+    this.cartItemsCount = 0;
+    this.cartTotal = 0;
+  }
 
 
   addtoCart(val: any){

@@ -30,15 +30,17 @@ export class DashboardComponent implements OnInit , OnChanges {
       if (user) {
         this.user = user.email;
         this.userLogged = true;
-        this.cartService.getCartItems(this.user);
       } else {
+        this.user = '';
         this.userLogged = false;
       }
     });
+    //console.log("get from dashboard")
+    //this.cartService.getCartItems(this.authService.userData.email);
     //this.cartService.getCartItems(this.user);
   }
   ngOnChanges(){
-    console.log("this is run");
+    //console.log("this is run");
     //this.cartService.getCartItems(this.user);
   }
 

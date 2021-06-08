@@ -1,4 +1,5 @@
 import { Component, Input, OnInit , OnChanges, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ProductsComponent implements OnInit , OnChanges {
   @Input() user!: string;
   public count = 0;
   public filteredProducts: any;
-  constructor(public cartService: CartService) { }
+  constructor(public cartService: CartService,private router: Router) { }
 
   ngOnInit(): void {
     //this.cartService.getCartItems(this.user);
@@ -24,10 +25,16 @@ export class ProductsComponent implements OnInit , OnChanges {
   }
 
   addTocart(val: any): void{
-    val = {...val,
-            'qty':1,
-           'user': this.user};
-    this.cartService.addtoCart(val);
+    if( this.user!==''){
+      console.log('user is present');
+      val = {...val,
+              'qty':1,
+            'user': this.user};
+      this.cartService.addtoCart(val);
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
   }
 
   productFilter(): any{

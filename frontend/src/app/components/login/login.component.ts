@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.authService.doGooglelogin()
     .then(res => {
       this.router.navigate(['/dashboard']);
+      console.log("get from login")
       this.cartService.getCartItems(res.email);
     }).catch(err => {
       console.log(err);
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     .then(res => {
       this.router.navigate(['/dashboard']);
       //console.log(res.email);
+      console.log("get from login")
       this.cartService.getCartItems(res.email);
       console.log(res);
     }).catch(err => {

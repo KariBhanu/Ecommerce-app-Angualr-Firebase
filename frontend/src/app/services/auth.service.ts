@@ -16,6 +16,7 @@ export class AuthService {
       JSON.parse(localStorage.getItem('user') || '{}');
     } else {
       this.userLogged = false;
+      //this.userData = '';
       localStorage.setItem('user', '');
       JSON.parse(localStorage.getItem('user') || '{}');
     }
