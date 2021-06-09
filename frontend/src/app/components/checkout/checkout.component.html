@@ -109,6 +109,7 @@
               type="button"
               class="btn btn-sm btn-danger mr-2 float-right"
               (click)="this.cartService.emptyCart(this.user)"
+              [disabled]="this.user === ''"
             >
               Empty Cart
             </button>
@@ -144,6 +145,7 @@
                         class="form-control text-center"
                         style="width: 10px"
                         value="{{ item.qty }}"
+                        readonly
                       />
                       <div class="input-group-append">
                         <button
